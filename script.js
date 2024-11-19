@@ -22,11 +22,11 @@ function adicionarLivro(titulo, autor, genero)
         autores.set(titulo, autor);
         generos.add(genero);
 
-        console.log(`O livros "${titulo}" foi adicionado.`);
+        console.log(`O livro "${titulo}" foi adicionado.`);
     }
     else
     {
-        console.log(`O livros "${titulo}" já existe na biblioteca.`)
+        console.log(`O livro "${titulo}" já existe na biblioteca.`);
     }
 }
 
@@ -71,11 +71,20 @@ function verificarDisponibilidade(titulo)
     }
 }
 
+// mapa para vincular os titulos aos generos
+const livrosGeneros = new Map([
+    ['Harry Potter', 'Fantasia'],
+    ['Senhor dos Aneis', 'Fantasia'],
+    ['Persy Jackson', 'Aventura']
+]);
+
 // 8 - busca
 function buscarLivrosPorGenero(genero) 
 {
     console.log(`Buscando livros por gênero "${genero}": `);
-    const livrosPorGenero = livros.filter(titulo => generos.has(genero));
+    const livrosPorGenero = Array.from(livrosGeneros.entries())
+        .filter(([titulo, gen]) => gen === genero)
+        .map(([titulo]) => titulo);
 
     if (livrosPorGenero.length > 0)
     {
